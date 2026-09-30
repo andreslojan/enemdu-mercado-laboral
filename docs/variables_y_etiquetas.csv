@@ -1,0 +1,144 @@
+﻿variable,etiqueta
+area,Area
+ciudad,Ciudad
+conglomerado,Conglomerado
+panelm,Panelm
+vivienda,Vivienda
+hogar,Hogar
+p01,Persona
+p02,Sexo
+p03,Edad
+p04,Relación de Parentesco
+p05a,Seguro Social - Alternativa 1
+p05b,Seguro Social - Alternativa 2
+p06,Estado civil
+p07,Asiste a clases
+p08,Jornada a la que asiste
+p081,El establecimiento donde estudia
+p085,Generalmente para la realización de las actividades educativas
+p09,Razón por la que no asiste
+p10a,Nivel de instrucción
+p10b,Año aprobado
+p11,Sabe leer y escribir
+p12a,Por sus estudios obtuvo algún título
+p12b,Qué título obtuvo
+p15,Como se considera
+p15aa,Dónde nació
+p15ab,Lugar de nacimiento
+cod_inf,Código del Informante
+p20,Trabajó la semana pasada
+p21,Actividad que realizó para ayudar en su hogar
+p22,Tiene trabajo del cual estuvo ausente
+p23,Razón por la que no trabajó
+p232,Continua(ó) recibiendo algún ingreso durante ausencia del trabajo
+p233,Desde que dejó de trabajar hasta que espera regresar ¿Cuánto tiempo estará (...) ausente:
+p24,Horas de trabajo en la semana anterior
+p25,Razón por la que trabajó menos de 40 horas
+p26,Razón por la que trabajó mas de 40 horas
+p27,Desea trabajar más horas
+p28,Está disponible para trabajar horas adicionales
+p29,Cuántas horas a la semana estaría disponible para trabajar
+p29a,Cuál es la razón por la que no desea o no está disponible para trabajar más horas
+p30,Gestión realizada para cambiar la situación actual de trabajo
+p31,Razón por la que busca cambiar la situación actual de trabajo
+p32,Buscó trabajo el mes anterior
+p33,Semanas que busca trabajo
+p34,Razón por la que no buscó trabajo
+p35,Desea trabajar y está dispuesto a hacerlo
+p36,Condición de inactividad
+p37,Trabajó anteriormente
+p38,Motivos por los que dejó de trabajar
+p39,Número de semanas que no trabaja
+p40,Rama de actividad
+p41,Grupo de ocupación
+p42,Categoría de ocupación
+p421,"El trabajo que realiza como (preg.41), es haciendo labores agrícolas, silvícolas, criando o cazando animales, o pescando"
+p422,Informalidad - Los productos obtenidos por el trabajo son
+p42a,Es socio de cooperativa o asociación
+p43,El trabajo que tiene es
+p44a,Recibe alimentación
+p44b,Recibe vivienda
+p44c,Recibe transporte
+p44d,Recibe vacaciones
+p44e,Recibe ropa de trabajo
+p44f,Recibe seguro social
+p44g,Recibe seguro médico
+p44h,Recibe guardería
+p44i,Recibe cursos de capacitación
+p44j,Recibe 13vo sueldo
+p44k,Recibe 14vo sueldo
+p45,Cuántos años trabaja
+p46,Sitio de trabajo
+p47a,Tamaño del establecimiento
+p47b,Número personas trabajan en el establecimiento
+p48,En el establecimiento se lleva
+p49,El establecimiento tiene RUC
+p50,Número de trabajos
+p51a,Horas de trabajo principal
+p51b,Horas de trabajo secundario
+p51c,Horas de otros trabajos
+p52,Rama de actividad - trabajo secundario
+p53,Grupo de ocupación - trabajo secundario
+p54,Categoría de ocupación - trabajo secundario
+p54a,Es socio de cooperativa o asociación
+p55,Sitio de trabajo secundario
+p56a,Tamaño establecimiento - trabajo secundario
+p56b,Personas que trabajan - trabajo secundario
+p57,En el establecimiento de trabajo secundario se lleva
+p58,El establecimiento de trabajo secundario tiene RUC
+p61b1,A cuál de las siguientes formas de seguridad social aporta actualmente
+p63,Ingresos - Patronos Cuenta Propia
+p64a,Retiró bienes del negocio
+p64b,Monto de retiro de bienes del negocio
+p65,Monto gastado en funcionamiento negocio
+p66,Ingreso de asalariados y/o empleados domésticos
+p67,Descuentos de asalariados
+p68a,Recibió ingreso en especies
+p68b,Ingreso en especies de asalariados
+p69,Ingreso ocup. secundaria - asalariados e independientes
+p70a,Recibió pago en especies - trabajo secundario
+p70b,Pago en especies - trabajo secundario
+p71a,Recibió ingresos derivados del capital
+p71b,Ingreso recibido por transacciones de capital
+p72a,Recibe jubilación o pensiones
+p72b,Ingreso por jubilación o pensiones
+p73a,Recibió regalos o donaciones
+p73b,Ingreso por regalos o donaciones - Monto
+p74a,Recibió dinero del exterior
+p74b,Ingreso del exterior - Monto
+p75,Recibió el BONO DE DESARROLLO HUMANO
+p76,Monto que recibió por el BONO DE DESARROLLO HUMANO
+p77,Recibe el BONO DE DISCAPACIDAD
+p78,Monto recibido por el BONO DE DISCAPACIDAD
+sd01,Realizó USTED algún trabajo por paga o para obtener ganancias
+sd021,La semana pasada que no tenía trabajo - Estudió o estuvo capacitándose
+sd022,La semana pasada que no tenía trabajo - Hizo actividades de esparcimiento (deporte)
+sd023,La semana pasada que no tenía trabajo - Realizó alguna gestión para buscar trabajo
+sd024,La semana pasada que no tenía trabajo - Ayudó o se dedicó a otras labores del hogar o la familia
+sd025,La semana pasada que no tenía trabajo - Ayudó como voluntario/a
+sd026,"La semana pasada que no tenía trabajo - Realizó trabajo agrícola, cría animales o pesca"
+sd027,La semana pasada que no tenía trabajo - Realizó manualidades o tejidos para la venta
+sd028,La semana pasada que no tenía trabajo - Ayudó en algún negocio familiar
+sd029,"La semana pasada que no tenía trabajo - Dio clases particulares, tareas dirigidas pagadas"
+sd0210,"La semana pasada que no tenía trabajo - Realizó venta de productos por internet, catálogo o venta directa"
+sd0211,La semana pasada que no tenía trabajo - Otro (especificar)
+sd03,El principal motivo por el que usted está sin trabajo es:
+ced01a,Tiene cédula de identidad
+estrato,Estratos
+fexp,Factor de expansión
+dominio,Dominios
+nnivins,Nivel de instrucción
+ingrl,Ingreso Laboral
+ingpc,Ingreso per capita
+condact,Condición de actividad
+empleo,Población con empleo
+desempleo,Población con desempleo
+secemp,Sectores de los Empleados (clasificación para >= 15 años)
+grupo1,Grupo de Ocupación CIUO8 (población ocupada de 15 años y más)
+rama1,Rama de Actividad CIIU 4.1 (población ocupada de 15 años y más)
+upm,Unidad Primaria de Muestreo
+id_vivienda,Identificador de vivienda
+id_hogar,Identificador de hogar
+id_persona,Identificador de persona
+periodo,Periodo
+mes,Mes
