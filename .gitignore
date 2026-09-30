@@ -1,0 +1,23 @@
+# Entornos
+.venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+
+# Datos y modelos
+data/raw/
+data/interim/
+*.sav
+*.parquet
+models/*.joblib
+
+# Secretos y sistema
+.env
+.vscode/
+Thumbs.db
+desktop.ini
