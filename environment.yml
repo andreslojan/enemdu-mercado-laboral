@@ -1,0 +1,22 @@
+name: enemdu
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - geopandas
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - plotly
+  - statsmodels
+  - scikit-learn
+  - pyarrow
+  - jupyter
+  - ipykernel
+  - pip:
+      - pyreadstat
+      - shap
+      - lightgbm
+      - streamlit

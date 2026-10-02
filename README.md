@@ -21,7 +21,7 @@
 ## Datos
 
 - **Fuente:** INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), I Trimestre 2026, base de personas (SPSS).
-- **Tamaño:** 82.894 registros y 143 variables; se usan 22 (ver `docs/diccionario_variables.md`).
+- **Tamaño:** 82.894 registros y 143 variables; se cargan 22 (ver `docs/diccionario_variables.md`).
 - **Licencia de los datos:** Creative Commons Atribución 4.0 (INEC).
 - Los microdatos no están en el repositorio.
 
@@ -66,7 +66,7 @@
 | | Hombres | Mujeres |
 |---|---|---|
 | Mediana de `ingrl` (USD) | 430 | 350 |
-| Media de `ingrl` (USD) | 516,4 | 467,6 |
+| Media de `ingrl` (USD) | 516,8 | 467,8 |
 
 Gráficos, mapas y modelo de ingresos: `[por completar]`.
 
@@ -77,8 +77,10 @@ Gráficos, mapas y modelo de ingresos: `[por completar]`.
 3. La base trimestral es representativa por dominio, no por provincia: las sumas de `fexp` por provincia no reproducen la población esperada. No se presentan resultados provinciales con esta base.
 4. Los años de estudio son una aproximación: convención propia y mezcla de sistemas educativos.
 5. La brecha de ingresos presentada es bruta; no controla por horas, ocupación ni educación. `[el modelo de Mincer la ajustará]`
-6. Un solo trimestre: sin tendencias. Al agregar períodos hay que marcar el quiebre metodológico 2020 a mayo de 2021 señalado por el INEC.
+6. El análisis de ingresos cubre 35.302 de 39.920 ocupados (88,4%). Quedan fuera los trabajadores no remunerados y los no clasificados (3.149), que no tienen ingreso, además de 1.469 ocupados con ingreso vacío, cero o código especial. Esto introduce un sesgo de selección.
 7. El diseño muestral complejo (estratos y UPM) no se modela por completo en la inferencia.
+8. El análisis de ingresos cubre 35.302 de 39.920 ocupados (88,4%): se excluyen los ingresos vacíos, ceros y códigos especiales. Los trabajadores no remunerados probablemente quedan fuera (hipótesis por verificar), lo que implica un sesgo de selección.
+9. Las horas de trabajo tienen valores extremos (hasta 120 por semana) que se tratarán en el modelo.
 
 ## Cómo reproducir
 
@@ -87,6 +89,13 @@ git clone https://github.com/TU_USUARIO/enemdu-mercado-laboral.git
 cd enemdu-mercado-laboral
 conda env create -f environment.yml
 conda activate enemdu
+Paquete	Versión
+Python	3.11.16
+pandas	3.0.6
+numpy	2.4.6
+statsmodels	0.15.0
+geopandas	1.2.0
+scikit-learn	1.9.1
 ```
 
 1. Descarga la base SPSS, el diccionario, la guía de usuario y el boletín desde la página de ENEMDU Trimestral del INEC: https://www.ecuadorencifras.gob.ec/enemdu-trimestral/
