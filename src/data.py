@@ -8,8 +8,10 @@ import pyreadstat
 RAIZ = Path(__file__).resolve().parents[1]
 RUTA_SAV = RAIZ / "data" / "raw" / "spss" / "enemdu_persona_2026_l_trimestre.sav"
 
-COLUMNAS = ["area", "ciudad", "p02", "p03", "condact", "fexp",
-            "ingrl", "secemp", "grupo1", "rama1", "nnivins"]
+COLUMNAS = ["area", "ciudad", "conglomerado", "dominio", "estrato", "upm",
+            "p02", "p03", "p10a", "p10b", "p15", "condact", "fexp",
+            "ingrl", "secemp", "grupo1", "rama1", "nnivins",
+            "p24", "p51a", "p51b", "p51c"]
 
 def cargar_enemdu(ruta=RUTA_SAV, columnas=COLUMNAS):
     """Carga solo las columnas necesarias y limpia los codigos especiales."""
