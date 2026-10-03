@@ -68,6 +68,8 @@
 | Mediana de `ingrl` (USD) | 430 | 350 |
 | Media de `ingrl` (USD) | 516,8 | 467,8 |
 
+"El promedio nacional por sexo oculta que la brecha de informalidad tiene signo opuesto en zona urbana (hombres más informales) y rural (mujeres más informales)."
+
 Gráficos, mapas y modelo de ingresos: `[por completar]`.
 
 ## Limitaciones
