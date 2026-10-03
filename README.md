@@ -72,6 +72,11 @@
 
 Gráficos, mapas y modelo de ingresos: `[por completar]`.
 
+## Interpretacion (Hipotesis)
+Hipótesis: la mayor informalidad con menos instrucción puede reflejar que los trabajos formales exigen credenciales, y que las personas con menos estudios se concentran en zonas rurales y en ocupaciones elementales. Estos datos descriptivos no distinguen entre esas explicaciones; el modelo de ingresos de la Fase 4 controlará por zona, ocupación y horas.
+
+Hipótesis: el mayor desempleo de los 15 a 24 años podría reflejar la entrada reciente al mercado laboral y la búsqueda del primer empleo. A edades altas, el desempleo bajo en la PEA podría deberse a que quienes pierden el empleo dejan de buscar y salen de la PEA. Ninguna de las dos se verifica con estos datos.
+
 ## Limitaciones
 
 1. La participación global difiere en 0,1 puntos de la cifra publicada (63,7 frente a 63,8). Con dos definiciones de PET se obtiene el mismo valor (63,745); la causa no está identificada.
