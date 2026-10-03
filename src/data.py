@@ -38,3 +38,13 @@ def indicadores_laborales(df):
         "Subempleo": tasa_ponderada(df, c.isin([2, 3]), pea),
         "Desempleo": tasa_ponderada(df, c.isin([7, 8]), pea),
     }
+
+
+def mediana_ponderada(valores, pesos):
+    """Mediana ponderada: primer valor cuyo peso acumulado alcanza la mitad del total."""
+    v = valores.to_numpy()
+    w = pesos.to_numpy()
+    orden = np.argsort(v)
+    v, w = v[orden], w[orden]
+    acum = np.cumsum(w)
+    return v[np.searchsorted(acum, acum[-1] / 2)]
