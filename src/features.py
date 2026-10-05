@@ -29,4 +29,5 @@ def agregar_variables(df):
     df["grupo_edad"] = pd.cut(df["p03"], bins=[14, 24, 34, 44, 54, 64, 120],
                               labels=["15-24", "25-34", "35-44", "45-54", "55-64", "65+"])
     df["informal"] = np.where(ocupado, (df["secemp"] == 2).astype(int), np.nan)
+    df["horas_total"] = df["p51a"] + df["p51b"].fillna(0) + df["p51c"].fillna(0)
     return df
