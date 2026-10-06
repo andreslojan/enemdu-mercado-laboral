@@ -20,4 +20,5 @@ models/*.joblib
 .env
 .vscode/
 Thumbs.db
-desktop.ini
+desktop.ini*.db
+*.sqlite
