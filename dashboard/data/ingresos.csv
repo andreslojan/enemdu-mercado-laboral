@@ -1,0 +1,9 @@
+﻿dimension,categoria,mediana,n
+Sexo,Hombre,430.0,20685
+Sexo,Mujer,350.0,14617
+Zona,Rural,240.0,9046
+Zona,Urbana,480.0,26256
+Nivel de instrucción,Básica,270.0,10905
+Nivel de instrucción,Media,430.0,12699
+Nivel de instrucción,Ninguno,155.0,618
+Nivel de instrucción,Superior,663.0,11050
