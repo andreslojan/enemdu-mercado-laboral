@@ -164,6 +164,7 @@ numpy	2.4.6
 statsmodels	0.15.0
 geopandas	1.2.0
 scikit-learn	1.9.1
+06_sql.ipynb construye la base local
 ```
 
 1. Descarga la base SPSS, el diccionario, la guía de usuario y el boletín desde la página de ENEMDU Trimestral del INEC: https://www.ecuadorencifras.gob.ec/enemdu-trimestral/
@@ -178,6 +179,7 @@ docs/        diccionario de variables, guía, boletín, tabulados
 notebooks/   exploración y validación
 reports/     tablas y figuras
 src/         data.py (carga, indicadores) y features.py (variables derivadas)
+sql/         queries.sql contiene consultas que reproducen los indicadores
 ```
 
 ## Fuente y autor
