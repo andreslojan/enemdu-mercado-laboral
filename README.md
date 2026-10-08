@@ -111,7 +111,7 @@ Otros resultados: rural frente a urbano −28,3% (M2) y −20,1% (M3); elasticid
 **Cómo leerlo:**
 - Son asociaciones, no efectos causales.
 - Perfil de la muestra: las mujeres tienen en promedio 11,8 años de estudio (hombres 10,8), viven menos en zona rural (23,0% frente a 29,7%) y trabajan menos horas (33,8 frente a 39,2 por semana). Eso explica por qué la brecha crece de −21,5% a −29,6% al controlar educación y zona, y baja a −8,7% al controlar horas.
-- Controlar por rama agranda la brecha de nuevo (−8,7% a −16,1%).
+- Al añadir la rama, la estimación pasa de −8,7% (IC 95%: −13,8 a −3,4) a −16,1% (−20,1 a −11,8); los intervalos se solapan ligeramente, por lo que no se prueba que la diferencia sea significativa.
 - La brecha que queda no equivale a discriminación: faltan ocupación dentro de la rama, tamaño de empresa e informalidad.
 
 ## Interpretacion (Hipotesis)
@@ -132,7 +132,7 @@ Lo siguiente son explicaciones posibles de patrones medidos. Estos datos no las 
 | Informalidad urbana: hombres 44,7%, mujeres 37,2%; rural: mujeres 78,9%, hombres 73,5% | La composición por rama o sexo difiere dentro de cada zona | Descomposición por rama y zona |
 | 53 mujeres por cada 100 hombres en la PEA a los 15-19 años; 86 a los 30-34 | Menor participación juvenil femenina por estudios y cuidados | Tasas de participación con inactivos y la variable de asistencia a clases |
 | Las mujeres trabajan 33,8 horas por semana frente a 39,2 | Cuidados del hogar o empleo parcial | No identificable con esta encuesta |
-| Controlar por rama agranda la brecha (−8,7% a −16,1%) | Las mujeres se concentran en ramas de mayor pago medio y ganan menos que los hombres dentro de ellas | Composición por rama y sexo (no calculada) |
+| Controlar por rama agranda la brecha (−8,7% a −16,1%) | Las mujeres se concentran en ramas de mayor pago medio y ganan menos que los hombres dentro de ellas | Consistente con los datos: las mujeres trabajan en ramas con un pago medio unos 10% mayor (promedio simple del logaritmo del ingreso; es aproximado). Falta una descomposición formal |
 
 ## Limitaciones
 

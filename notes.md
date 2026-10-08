@@ -1,3 +1,4 @@
+En una entrevista te preguntarán por qué exportaste sumas de pesos y no porcentajes. La respuesta: la tasa de un grupo es una razón de sumas, no un promedio de porcentajes. Si el usuario agrupa categorías, un porcentaje precalculado daría un número incorrecto, y la medida DAX lo recalcula bien.
 
 "Los prefijos de ciudad dan 24 códigos, pero las sumas de fexp por provincia no reproducen la población esperada. Posible falta de calibración provincial en la base trimestral."
 
