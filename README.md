@@ -82,6 +82,29 @@ Más gráficos en `reports/figures/` (edad, rama, etnia, pirámide de la PEA, br
 
 "El promedio nacional por sexo oculta que la brecha de informalidad tiene signo opuesto en zona urbana (hombres más informales) y rural (mujeres más informales)."
 
+## Dashboard (Power BI)
+
+Archivo: `dashboard/enemdu_dashboard.pbix` (requiere Power BI Desktop, solo Windows). Los datos importados son tablas agregadas (`dashboard/data/*.csv`): no incluye microdatos.
+
+![Página 1: indicadores](docs/dashboard_pagina1.png)
+![Página 2: ingresos y brecha](docs/dashboard_pagina2.png)
+![Página 3: rama y estructura](docs/dashboard_pagina3.png)
+
+- **Página 1:** cinco indicadores nacionales y un gráfico que cambia por indicador y dimensión (sexo, zona, edad, dominio, instrucción, etnia).
+- **Página 2:** medianas de ingreso por nivel, sexo o zona (con el SBU 2026) y la brecha de las mujeres con intervalos de confianza.
+- **Página 3:** informalidad por rama y pirámide de la PEA.
+
+**Diseño:** las tablas exportadas guardan sumas de pesos (numerador y denominador) y las tasas se calculan con medidas DAX. Una tasa de grupo es una razón de sumas: si un porcentaje precalculado se promedia o se agrupa, da un valor incorrecto.
+
+**Validación:** las cinco tarjetas nacionales y los gráficos se verificaron contra los cálculos en pandas y SQL.
+
+**Limitaciones del dashboard:**
+- Las tarjetas muestran siempre el total nacional; solo los gráficos responden a los segmentadores.
+- Los datos están en formato largo, con una sola dimensión por fila: no se pueden cruzar dos dimensiones (por ejemplo, sexo por zona).
+- "Resto país" no tiene cifra oficial para validar.
+- En el gráfico de la página 1, ordenar por valor rompe el orden natural de edad e instrucción.
+- El archivo guarda los datos importados; para actualizarlos desde otra computadora hay que cambiar la ruta de origen (Transformar datos → Configuración de origen de datos).
+
 ## Modelo de ingresos (tipo Mincer)
 
 **Muestra:** ocupados de 18 a 65 años, con ingreso laboral mayor a 0 y hasta 84 horas semanales: 32.258 de 39.920 ocupados (de 35.302 con ingreso positivo se excluyen 3.019 por edad y 25 por horas).
