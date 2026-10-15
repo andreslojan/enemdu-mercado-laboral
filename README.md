@@ -2,7 +2,7 @@
 
 > Análisis de microdatos de la ENEMDU del INEC: indicadores laborales ponderados y validados contra las cifras oficiales, brechas por sexo y zona, informalidad e ingresos.
 
-**Estado:** en progreso. Completado: validación contra el INEC, análisis descriptivo (9 gráficos) y modelo de ingresos. Pendiente: SQL, dashboard e informe.
+**Estado:** completo (alcance mínimo), reports/informe_ejecutivo.pdf
 
 ## Hallazgo principal
 
@@ -160,7 +160,7 @@ Lo siguiente son explicaciones posibles de patrones medidos. Estos datos no las 
 ## Limitaciones
 
 1. La participación global difiere en 0,1 puntos de la cifra publicada (63,7 frente a 63,8). Con dos definiciones de PET se obtiene el mismo valor (63,745); la causa no está identificada.
-2. `ingrl` no pudo contrastarse con una cifra oficial. Se asume mensual y en dólares. Como verificación de plausibilidad, la mediana (USD 430) es cercana al SBU 2026 (USD 482) y el ingreso se comporta de forma coherente con la condición de actividad (con excepciones minoritarias que no se pudieron explicar).
+2. ingrl no pudo contrastarse con una cifra oficial para este trimestre. La metodología del INEC (2015) lo describe como ingreso laboral del mes anterior, de la actividad principal y la secundaria, y su sintaxis oficial recodifica −1 y 999999 como perdidos, igual que este proyecto. Se asume en dólares. No se verificó que esa metodología aplique sin cambios a la base de 2026. El ingreso de los independientes es neto de gastos y el de los asalariados incluye impuestos y aportes; no son estrictamente comparables.
 3. La base trimestral es representativa por dominio, no por provincia: las sumas de `fexp` por provincia no reproducen la población esperada. No se presentan resultados provinciales con esta base.
 4. Los años de estudio son una aproximación: convención propia y mezcla de sistemas educativos.
 5. La brecha de ingresos presentada es bruta; no controla por horas, ocupación ni educación. `[el modelo de Mincer la ajustará]`
