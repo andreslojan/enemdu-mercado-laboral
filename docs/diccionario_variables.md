@@ -1,92 +1,90 @@
-# Diccionario de variables: ENEMDU, I Trimestre 2026
+# Diccionario de variables: ENEMDU I Trimestre 2026
 
-**Fuente:** INEC, ENEMDU, base de personas (`enemdu_persona_2026_l_trimestre.sav`): 82.894 registros y 143 columnas. Se cargan 22.
-**Regla general:** todo indicador se pondera con `fexp`.
-**Estados:** *Confirmada* (validada con cifras oficiales o coherencia interna), *Supuesto* (razonable, no verificado), *Pendiente*, *Experimental*.
+Fuente: INEC, ENEMDU, base de personas (SPSS `.sav`). Este diccionario cubre solo las 22 variables que usa el proyecto (`COLUMNAS` en `src/data.py`) y las derivadas en `src/features.py`.
 
-## 1. Variables originales
+Convención de estado: **Verificado** = comprobado con los datos o con una cifra oficial del INEC. **Documentado** = tomado de la metodología oficial (Castillo y Rosero, 2015). **Hipótesis** = interpretación mía sin verificación oficial.
 
-| Variable | Descripción (etiqueta del .sav) | Universo | Códigos / valores | Tratamiento | Estado |
-|---|---|---|---|---|---|
-| `fexp` | Factor de expansión | Todos | Numérico; suma = 19.026.779 | Pondera todo | Confirmada: reproduce las cifras del INEC. El diccionario del INEC solo dice "factor de expansión" |
-| `condact` | Condición de actividad | Todos | 0 Menores de 15; 1 Empleo adecuado/pleno; 2 Subempleo por insuficiencia de tiempo; 3 Subempleo por insuficiencia de ingresos; 4 Otro empleo no pleno; 5 Empleo no remunerado; 6 Empleo no clasificado; 7 Desempleo abierto; 8 Desempleo oculto; 9 Población económicamente inactiva | Ocupados = 1 a 6; PEA = 1 a 8; PET = 1 a 9 | Confirmada |
-| `ingrl` | Ingreso laboral | Ocupados (39.920) | -1 "gasta más de lo que gana" (380); 999999 "no informa" (123); vacío (3.570); 0 (545); resto en USD (35.302) | -1 y 999999 pasan a NaN. El análisis usa ocupados con `ingrl > 0` | Supuesto: mensual y en USD. Sin cifra oficial para contrastar. Plausible frente al SBU 2026 (USD 482). Ver sección 4 |
-| `p02` | Sexo | Todos | 1 Hombre; 2 Mujer | Se mapea a `sexo` | Confirmada |
-| `p03` | Edad | Todos | Años; 98 = "98 y más"; 99 = "no informa" | 99 pasa a NaN (no hay casos en esta base) | Confirmada |
-| `area` | Área | Todos | 1 Urbana; 2 Rural | Se mapea a `zona` | Confirmada |
-| `dominio` | Dominios | Todos | 1 Quito; 2 Guayaquil; 3 Cuenca; 4 Machala; 5 Ambato; 6 Resto país | Se mapea a `dominio_nombre` | Confirmada: 20 de 20 indicadores coinciden con el INEC |
-| `ciudad` | Ciudad | Todos | Código de 5 dígitos (39.782 casos) o 6 dígitos (43.112); 587 valores distintos; sin etiquetas | Prefijo de 2 dígitos (tras `zfill(6)`) = posible provincia | Experimental: da 24 prefijos, pero `fexp` no reproduce la población provincial |
-| `conglomerado` | Conglomerado | Todos | Prefijos 00 a 54 y 90 | No se usa | No sirve como provincia |
-| `upm` | Unidad Primaria de Muestreo | Todos | 3.855 valores distintos | Errores estándar agrupados en el modelo de ingresos | Confirmada (existe); estructura pendiente |
-| `estrato` | Estratos | Todos | 150 valores distintos; sin etiquetas | Diseño muestral | Pendiente: relación con `upm` |
-| `p10a` | Nivel de instrucción | 5 años y más (los 4.137 nulos tienen de 0 a 4 años) | 1 Ninguno; 2 Centro de alfabetización; 3 Jardín de infantes (sin casos); 4 Primaria; 5 Educación Básica; 6 Secundaria; 7 Educación Media; 8 Superior no universitario; 9 Superior universitario; 10 Postgrado | Base de `anios_estudio` | Confirmada |
-| `p10b` | Año aprobado | Con dato: 76.439. Sin dato: 6.455 = 4.137 (0 a 4 años) + 2.318 ("Ninguno") | Sin etiquetas. Rango por nivel: Alfabetización 1 a 7; Primaria 1 a 6; Básica 0 a 10; Secundaria 1 a 6; Media 1 a 3; Superior no univ. 1 a 3; Universitario 1 a 8; Postgrado 1 a 5 | Base de `anios_estudio` | Confirmada |
-| `nnivins` | Nivel de instrucción (agrupado) | 5 años y más (mismos 4.137 nulos que `p10a`) | 1 Ninguno; 2 Centro de alfabetización; 3 Educación Básica; 4 Educación Media/Bachillerato; 5 Superior | Categórica en modelos | Confirmada |
-| `p15` | Como se considera (autoidentificación étnica) | 4.137 nulos, igual cantidad que `p10a`; falta verificar que sean las mismas personas | 1 Indígena; 2 Afroecuatoriano; 3 Negro; 4 Mulato; 5 Montuvio; 6 Mestizo; 7 Blanco; 8 Otra | Se mapea a `etnia` | Códigos confirmados; universo pendiente |
-| `secemp` | Sectores de los empleados | Ocupados (verificado: no nulo coincide con `condact` 1 a 6) | 1 Formal; 2 Informal; 3 Empleo doméstico; 4 No clasificados | `informal` = (`secemp` == 2) | Confirmada: 53,5% coincide con el boletín |
-| `grupo1` | Grupo de ocupación CIUO-08 | Ocupados | 1 a 10; 99 No especificado | Sin transformar | Confirmada (etiquetas) |
-| `rama1` | Rama de actividad CIIU 4.1 | Ocupados | 1 a 22 (A a U; 22 No especificado) | Sin transformar | Confirmada (etiquetas) |
-| `p24` | Horas de trabajo en la semana anterior | Dato en todos los ocupados; también en 378 no ocupados | Numérico; rango 1 a 120; mediana 40 | Sin transformar | Confirmada (descriptivo); definición exacta pendiente |
-| `p51a` | Horas de trabajo principal | Dato en todos los ocupados | Numérico; rango 1 a 120; media 35,1; mediana 40 | Sin transformar | Pendiente: ¿habituales o efectivas? |
-| `p51b` | Horas de trabajo secundario | Unos 2.400 ocupados (6%) con dato | Numérico; rango 1 a 45; mediana 10 | Vacío se interpreta como "sin segundo trabajo" | Supuesto |
-| `p51c` | Horas de otros trabajos | Unos 2.400 ocupados con dato | Numérico; rango 0 a 20; casi siempre 0 | Vacío se interpreta como "sin otros trabajos" | Supuesto |
+## 1. Diseño muestral y ponderación
 
-## 2. Variables derivadas (`src/features.py`)
-
-| Variable | Definición | Notas |
+| Variable | Descripción | Estado |
 |---|---|---|
-| `sexo`, `zona`, `dominio_nombre`, `etnia` | Etiquetas de texto de `p02`, `area`, `dominio`, `p15` | Si se agrupan etnias (por ejemplo, afrodescendientes), declararlo |
-| `anios_estudio` | Ninguno, alfabetización y jardín = 0. Primaria y Básica = `p10b`. Secundaria = 6 + `p10b`. Media = 10 + `p10b`. Superior (no univ. y univ.) = 13 + `p10b`. Postgrado = 17 + `p10b` | Convención propia, no oficial. Mezcla el sistema educativo antiguo y el actual (un año de diferencia). Sin valor para menores de 5 años |
-| `exper` | `p03 - anios_estudio - 6`, mínimo 0 | Experiencia potencial. Llega a 92 por `p03` = 98; en el modelo de ingresos se restringe la edad |
-| `grupo_edad` | 15-24, 25-34, 35-44, 45-54, 55-64, 65+ | Solo para edades de 15 en adelante |
-| `informal` | 1 si `secemp` == 2; 0 si es ocupado y no informal; NaN si no es ocupado | Validada contra el boletín |
+| `fexp` | Factor de expansión. Todos los indicadores se ponderan con él (razón de sumas de pesos). | Verificado |
+| `upm` | Unidad primaria de muestreo. Se usa para agrupar errores estándar. | Verificado |
+| `estrato` | Estrato de muestreo. Cada UPM pertenece a un solo estrato. | Verificado |
+| `dominio` | Dominio de estudio (5 ciudades autorrepresentadas y resto del país). Cada estrato pertenece a un solo dominio. La base es representativa por dominio, no por provincia. | Verificado |
+| `conglomerado` | Identificador de conglomerado. No se usa en el análisis. | Documentado |
+| `area` | Área: urbano o rural. | Verificado |
+| `ciudad` | Código de ciudad/provincia. El catálogo de códigos no se pudo resolver, por eso no se usa para análisis geográfico. | Pendiente |
 
-## 3. Decisiones de limpieza
+Anidamiento verificado en el cuaderno 01: UPM dentro de estrato, estrato dentro de dominio (máximo 1 en ambos casos).
 
-- `ingrl` = -1 o 999999 pasa a NaN.
-- El análisis de ingresos usa ocupados con `ingrl > 0`: 35.302 de 39.920 (88,4%).
-- `p03` = 99 pasa a NaN (no hay casos en esta base).
-- `ciudad`: no usar para análisis provincial en este trimestre.
+## 2. Condición de actividad (`condact`)
 
-## 4. Cobertura del ingreso laboral (`ingrl`)
+Definiciones según la metodología oficial del INEC. Umbrales: 40 horas semanales (30 para 15 a 17 años) y salario básico unificado (SBU).
 
-| `condact` | Ocupados | Vacío o código especial (NaN) | Ingreso = 0 | Con ingreso > 0 |
-|---|---|---|---|---|
-| 1 Empleo adecuado | 17.135 | 0 | 0 | 17.135 |
-| 2 Subempleo por tiempo | 6.541 | 592 | 126 | 5.823 |
-| 3 Subempleo por ingresos | 406 | 0 | 13 | 393 |
-| 4 Otro empleo no pleno | 12.689 | 332 | 406 | 11.951 |
-| 5 Empleo no remunerado | 3.030 | 3.030 | 0 | 0 |
-| 6 Empleo no clasificado | 119 | 119 | 0 | 0 |
-| **Total** | **39.920** | **4.073** | **545** | **35.302** |
+| Código | Categoría | Definición | Grupo |
+|---|---|---|---|
+| 0 | Menores de 15 años | Fuera de la población en edad de trabajar | No PET |
+| 1 | Empleo adecuado | 40 horas o más e ingreso igual o superior al SBU; o menos de 40 horas, ingreso igual o superior al SBU y sin deseo de trabajar más | Ocupado |
+| 2 | Subempleo por tiempo | Menos de 40 horas, desea y está disponible para trabajar más; cualquier nivel de ingreso | Ocupado |
+| 3 | Subempleo por ingresos | 40 horas o más, ingreso inferior al SBU y desea trabajar más | Ocupado |
+| 4 | Otro empleo no pleno | Insuficiencia de horas o de ingresos sin deseo de trabajar más | Ocupado |
+| 5 | Empleo no remunerado | Ocupado sin ingreso laboral el mes anterior | Ocupado |
+| 6 | Empleo no clasificado | Ocupado con información insuficiente para clasificarlo | Ocupado |
+| 7 | Desempleo abierto | Sin empleo, busca y está disponible | Desocupado |
+| 8 | Desempleo oculto | Sin empleo, no busca por razones específicas, está disponible | Desocupado |
+| 9 | Población económicamente inactiva (PEI) | Fuera de la fuerza de trabajo | PEI |
 
-- Los no remunerados y los no clasificados (3.149 personas) quedan fuera del análisis de ingresos porque no tienen ingreso. Eso es un sesgo de selección.
-- Verificación de plausibilidad con el SBU 2026 (USD 482, según el Ministerio de Trabajo):
+Agregados usados: ocupados = 1 a 6; PEA = 1 a 8; PET = 1 a 9 (15 años o más).
 
-| `condact` | Mediana (USD) | % bajo el SBU |
+Advertencia: el documento metodológico es de 2015 (sintaxis de 2014, SBU de 340 USD). Que se aplique sin cambios a la base de 2026 no está verificado; lo que sí se verificó es que los indicadores agregados reproducen cifras publicadas (informalidad 53,5 %).
+
+## 3. Ingreso y horas
+
+| Variable | Descripción | Estado |
 |---|---|---|
-| 1 Empleo adecuado | 640 | 3,5 |
-| 2 Subempleo por tiempo | 200 | 94,0 |
-| 3 Subempleo por ingresos | 291 | 100,0 |
-| 4 Otro empleo no pleno | 234 | 99,9 |
+| `ingrl` | Ingreso laboral del mes anterior (ocupación principal más secundaria), asumido en USD mensuales. Independientes: neto de gastos. Dependientes: incluye impuestos y aportes. Los valores −1 y 999999 se recodifican como faltantes. | Documentado; unidad asumida |
+| `p24` | Horas efectivamente trabajadas la semana de referencia. | Documentado |
+| `p51a`, `p51b`, `p51c` | Horas habituales de trabajo (principal, secundaria, otras). La sintaxis oficial suma todas las `p51*`; 999 es faltante. | Documentado |
+| `horas_total` (derivada) | `p51a + p51b + p51c`, con faltantes de `p51b` y `p51c` tratados como 0. | Verificado |
 
-- El umbral esperado por cada categoría es de memoria. Falta confirmarlo en la página "Metodología de empleo según condición de actividad" del INEC. Los casos que no encajan (3,5% y 6,0%) no se han podido explicar.
+Umbral del SBU en esta base: en empleo adecuado el ingreso mínimo es 470 USD, el 0,0 % está por debajo de 470 y el 3,49 % por debajo de 482 (SBU 2026). El máximo en subempleo por ingresos es 480 USD.
 
-## 5. Horas de trabajo
+- **Hipótesis:** el INEC aplicó el SBU de 2025 (470 USD) al ingreso del mes anterior. Explica el 3,49 % bajo 482.
+- **Sin explicar:** el máximo de 480 en subempleo por ingresos es algo superior a 470; podría haber umbrales mixtos según el mes de referencia. No lo verifiqué.
 
-- `p24` coincide con `p51a` en 79,6% de los ocupados, y con `p51a` + `p51b` + `p51c` en 84,8%. Sugiere que `p24` incluye todos los trabajos (inferencia, no confirmada).
-- Suma de las tres variables `p51`: media 36,1; mediana 40; percentil 99 = 70; máximo 129. 25 casos superan las 84 horas y 5 superan las 100.
+Cobertura de ingreso: 35.302 de 39.920 ocupados (88,4 %) tienen `ingrl` válido.
 
-## 6. Pendientes
+## 4. Demografía y educación
 
-1. Confirmar si `p51a` son horas habituales o efectivas.
-2. Decidir el tratamiento de las horas extremas en el modelo de ingresos.
-3. Confirmar los umbrales de `condact` frente al SBU en la metodología del INEC.
-4. Verificar que los nulos de `p15` son las mismas personas que los de `nnivins`.
-5. Contrastar los prefijos de `ciudad` con el catálogo oficial de provincias.
-6. Revisar cómo se relacionan `upm` y `estrato`.
-7. Agregar `horas_total` a `features.py` cuando se decida cómo tratar los extremos.
+| Variable | Descripción | Estado |
+|---|---|---|
+| `p02` | Sexo (derivada: `sexo`). | Verificado |
+| `p03` | Edad en años; 99 se recodifica como faltante. | Verificado |
+| `p15` | Nivel de instrucción más alto aprobado. Sus nulos coinciden con los de `nnivins` (edades 0 a 4). | Verificado |
+| `nnivins` | Nivel de instrucción (agrupado). | Verificado |
+| `p10a`, `p10b` | Autoidentificación étnica y detalle. Se agrupa como Indígena, Montuvio, Afrodescendiente, Blanco y Mestizo; "Otra" (n = 17) se excluye de los gráficos. | Verificado |
 
-## 7. Cómo mantener este archivo
+## 5. Ocupación
 
-Cada vez que se agregue una variable a `COLUMNAS` o a `features.py`, agregar su fila el mismo día. Cambiar un estado solo cuando haya evidencia.
+| Variable | Descripción | Estado |
+|---|---|---|
+| `secemp` | Sector de empleo. Informal si `secemp == 2`, sobre ocupados. | Verificado (53,5 %) |
+| `grupo1` | Grupo de ocupación. | Documentado |
+| `rama1` | Rama de actividad económica. | Documentado |
+
+## 6. Variables derivadas (`src/features.py`)
+
+| Variable | Construcción |
+|---|---|
+| `anios_estudio` | Mapeo de `p15` a años: `{4:0, 5:0, 6:6, 7:10, 8:13, 9:13, 10:17}` |
+| `exper` | `p03 − anios_estudio − 6`, mínimo 0 (experiencia potencial) |
+| `grupo_edad` | 15-24, 25-34, 35-44, 45-54, 55-64, 65+ |
+| `informal` | 1 si `secemp == 2`, 0 si no, faltante fuera de ocupados |
+| `zona`, `sexo`, `etnia`, `dominio_nombre` | Etiquetas legibles de `area`, `p02`, `p10a` y `dominio` |
+
+## 7. Pendiente
+
+- Catálogo de códigos de `ciudad` (provincias): no resuelto; impide análisis provincial.
+- Confirmar con el INEC si el umbral de 470 USD aplica a toda la base y por qué el máximo de subempleo por ingresos es 480.
+- Diferencia de una décima en participación global (63,7 % frente a 63,8 %): causa desconocida.
